@@ -376,6 +376,7 @@ class MainFrame(wx.Frame):
 		if os.path.exists(archivo): 
 			wifiarc=open(archivo,'r')
 			wfap=wifiarc.readline()
+			wifiarc.close()
 			self.wifiap.SetValue(wfap.strip())
 #===================================================
 
@@ -649,7 +650,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/"""
 		if os.path.exists(archivo): 
 			wifiarc=open(archivo,'r')
 			wfap=wifiarc.readline()
-		out=_('OpenPlotter'+wfap.strip()+'\n')
+			wifiarc.close()
+		out=_('OpenPlotter'+wfap+'\n')
 #========================================
 		ip_info=subprocess.check_output(['hostname', '-I'])
 		out=_(' NMEA 0183:\n')
