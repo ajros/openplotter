@@ -39,11 +39,23 @@ if wifi_server=='1':
 	chipset= 'default'
 
 #Agregado -----------------------------
-	archivo = '/home/pi/.config/openplotter/WiFiAP.conf' 
 	wfap=''
-	if os.path.exists(archivo): 
+	archivo = '/home/pi/.config/openplotter/WiFiAP.conf'
+	if os.path.exists(archivo): # si ya fue configurado en openplotter
 		wifiarc=open(archivo,'r')
 		wfap=wifiarc.readline()
+		wifiarc.close()
+	else:
+		# esto permite, para la primera vez, configurar varias microSD sin abrir OpenPlotter, directamente desde el lector, en la raiz
+		archivo = '/boot/WiFiAP.conf'
+		if os.path.exists(archivo): 
+			wifiarc=open(archivo,'r')
+			wfap=wifiarc.readline()
+			wifiarc.close()
+			# ahora grabo en localizacion principal
+			wifiarc=open('/home/pi/.config/openplotter/WiFiAP.conf','w')
+			wifiarc.write(wfap)
+			wifiarc.close()
 #======================================
 
 	output=subprocess.check_output('lsusb')
