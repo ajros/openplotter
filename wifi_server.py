@@ -38,6 +38,14 @@ if wifi_server=='1':
 	driver='nl80211'
 	chipset= 'default'
 
+#Agregado -----------------------------
+	archivo = '/home/pi/.config/openplotter/WiFiAP.conf' 
+	wfap=''
+	if os.path.exists(archivo): 
+		wifiarc=open(archivo,'r')
+		wfap=wifiarc.readline()
+#======================================
+
 	output=subprocess.check_output('lsusb')
 
 	if 'RTL8188CUS' in output:
@@ -66,7 +74,10 @@ if wifi_server=='1':
 	file.write(data)
 	file.close()
 
-	data='interface='+wlan+'\ndriver='+driver+'\nssid=OpenPlotter\nchannel=6\nwmm_enabled=1\nwpa=1\nwpa_passphrase='+passw+'\nwpa_key_mgmt=WPA-PSK\nwpa_pairwise=TKIP\nrsn_pairwise=CCMP\nauth_algs=1\nmacaddr_acl=0'
+#Modificado----------------------------
+	data='interface='+wlan+'\ndriver='+driver+'\nssid=OpenPlotter'+wfap.strip()+'\nchannel=6\nwmm_enabled=1\nwpa=1\nwpa_passphrase='+passw+'\nwpa_key_mgmt=WPA-PSK\nwpa_pairwise=TKIP\nrsn_pairwise=CCMP\nauth_algs=1\nmacaddr_acl=0'
+#======================================
+
 	file = open('/etc/hostapd/hostapd.conf', 'w')
 	file.write(data)
 	file.close()
