@@ -191,7 +191,7 @@ class MainFrame(wx.Frame):
 
 #Agregado----sin acceso a lenguaje (texto puesto en espanol)
 		self.wifiap = wx.TextCtrl(self.page3, -1, size=(100, 32), pos=(20, 155))
-		self.wifiap_label=wx.StaticText(self.page3, label=_('Dejar vacio o numero\npara el nombre del access point'), pos=(140, 155))
+		self.wifiap_label=wx.StaticText(self.page3, label=_('Dejar vacio o escribir un numero\npara el nombre del punto de acceso'), pos=(140, 155))
 #============================================
 
 		wx.StaticBox(self.page3, label=_(' Addresses '), size=(270, 265), pos=(415, 10))
@@ -652,6 +652,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/"""
 			wfap=wifiarc.readline()
 			wifiarc.close()
 		out=_('OpenPlotter'+wfap+'\n')
+		out+=_('____________________\n')
 #========================================
 		ip_info=subprocess.check_output(['hostname', '-I'])
 		out=_(' NMEA 0183:\n')
@@ -694,7 +695,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/"""
 		wifiarc=open('/home/pi/.config/openplotter/WiFiAP.conf','w')
 		wifiarc.write(wfapi)
 		wifiarc.close()
-		msg=_('Fue grabado el nombre del WiFi Access Point como:   OpenPlotter'+wfapi)
+		msg=_('Fue grabado el nombre del punto de acceso WiFi como:   OpenPlotter'+wfapi)
 		self.ShowMessage(msg)
 # =======================================
 
