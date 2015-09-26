@@ -614,6 +614,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/"""
 		isChecked = self.wifi_enable.GetValue()
 		wlan=self.wlan.GetValue()
 		passw=self.passw.GetValue()
+#Agregado -------------------------------
+		self.passw.Show()
+#========================================
 		if isChecked:
 			self.enable_disable_wifi(1)
 			if len(passw)>=8:
@@ -645,6 +648,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/"""
 
 	def show_ip_info(self, e):
 #Agregado y Modificado--------------------
+		isChecked = self.wifi_enable.GetValue()
+		if isChecked:
+			self.passw.Hide()
+		else:
+			self.passw.Show()
 		archivo = '/home/pi/.config/openplotter/WiFiAP.conf'
 		wfap=''
 		if os.path.exists(archivo): 
